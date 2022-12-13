@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1094410187469",
+    "project_id": "riverpod-skeleton",
+    "storage_bucket": "riverpod-skeleton.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1094410187469:android:19f7cdd60cff0d1f126f84",
+        "android_client_info": {
+          "package_name": "com.riverpod_skeleton"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1094410187469-ibm2jn9en8nsq92qfm2oqs4r8fku0qmh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADD83ktmbg1IuvcozuolGhDke3RQJoDx8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1094410187469-ibm2jn9en8nsq92qfm2oqs4r8fku0qmh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
