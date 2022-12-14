@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_skeleton/app/config/routes/route_name.dart';
-import 'package:riverpod_skeleton/app/providers/nav_bar_provider.dart';
+import 'package:riverpod_skeleton/app/providers/navbar/nav_bar_provider.dart';
 
 class BottomNavBar extends ConsumerStatefulWidget {
   const BottomNavBar({super.key});
