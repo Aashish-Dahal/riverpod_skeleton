@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_skeleton/app.dart';
 import 'package:riverpod_skeleton/app/core/utils/assest_path.dart';
+import 'package:riverpod_skeleton/injector.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await initializeDependencies();
   runApp(EasyLocalization(
       startLocale: const Locale('en'),
       useOnlyLangCode: true,
