@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart'
     show
+        AlwaysStoppedAnimation,
         BorderRadius,
         BorderSide,
         BoxConstraints,
         BuildContext,
+        CircularProgressIndicator,
         Clip,
+        Color,
         Key,
         RawMaterialButton,
         RoundedRectangleBorder,
+        SizedBox,
         StatelessWidget,
         Text,
         Theme,
@@ -26,6 +30,7 @@ class Button extends StatelessWidget {
   final BoxConstraints? constraints;
   final bool isCancel;
   final ButtonType? type;
+  final bool loading;
   final bool? disabled;
   const Button(
       {Key? key,
@@ -33,6 +38,7 @@ class Button extends StatelessWidget {
       required this.label,
       this.constraints,
       this.disabled = false,
+      this.loading = false,
       required this.onPressed,
       this.isCancel = false})
       : super(key: key);
@@ -61,9 +67,20 @@ class Button extends StatelessWidget {
             : type == ButtonType.filled
                 ? AppColors.purple
                 : null,
-        child: Text(
-          label,
-          style: Theme.of(context).textTheme.button,
-        ));
+        child: loading
+            ? const SizedBox(
+                height: 25,
+                width: 25,
+                child: CircularProgressIndicator.adaptive(
+                  strokeWidth: 2,
+                  valueColor: AlwaysStoppedAnimation<Color>(AppColors.white),
+                ),
+              )
+            : disabled!
+                ? null
+                : Text(
+                    label,
+                    style: Theme.of(context).textTheme.button,
+                  ));
   }
 }
