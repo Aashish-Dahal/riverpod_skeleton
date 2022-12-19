@@ -10,19 +10,13 @@ import 'package:riverpod_skeleton/app/widgets/atoms/input_field.dart';
 
 import '../../core/utils/app_colors.dart';
 
-class RegisterPage extends ConsumerWidget {
+class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final formKey = GlobalKey<FormBuilderState>();
-    ref.listen(authNotifierProvider, (prev, next) {
-      next.maybeWhen(
-        orElse: () => null,
-        authenticated: (user) {},
-        unauthenticated: (message) {},
-      );
-    });
+  Widget build(BuildContext context) {
+    final formKey1 = GlobalKey<FormBuilderState>();
+
     return Scaffold(
         appBar: AppBar(
           title: const Text('Register Page'),
@@ -30,7 +24,7 @@ class RegisterPage extends ConsumerWidget {
         body: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
           child: FormBuilder(
-            key: formKey,
+            key: formKey1,
             child: Column(
               children: [
                 InputField(
@@ -59,21 +53,25 @@ class RegisterPage extends ConsumerWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                Button(
-                  disabled: ref
-                      .watch(authNotifierProvider)
-                      .maybeWhen(orElse: () => false, loading: () => true),
-                  loading: ref
-                      .watch(authNotifierProvider)
-                      .maybeWhen(orElse: () => false, loading: () => true),
-                  label: 'Register',
-                  onPressed: () {
-                    if (formKey.currentState!.validate()) {
-                      formKey.currentState!.save();
-                      ref
-                          .read(authNotifierProvider.notifier)
-                          .firebaseRegister(formKey.currentState!.value);
-                    }
+                Consumer(
+                  builder: (context, ref, child) {
+                    return Button(
+                      disabled: ref
+                          .watch(authNotifierProvider)
+                          .maybeWhen(orElse: () => false, loading: () => true),
+                      loading: ref
+                          .watch(authNotifierProvider)
+                          .maybeWhen(orElse: () => false, loading: () => true),
+                      label: 'Register',
+                      onPressed: () {
+                        if (formKey1.currentState!.validate()) {
+                          formKey1.currentState!.save();
+                          ref
+                              .read(authNotifierProvider.notifier)
+                              .firebaseRegister(formKey1.currentState!.value);
+                        }
+                      },
+                    );
                   },
                 ),
                 const SizedBox(

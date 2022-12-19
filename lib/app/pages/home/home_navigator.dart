@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:riverpod_skeleton/app/widgets/molecules/bottom_nav_bar.dart';
 
 class HomeNavigator extends StatelessWidget {
@@ -9,6 +7,11 @@ class HomeNavigator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: child, bottomNavigationBar: const BottomNavBar());
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text('Riverpod Skeleton'),
+        ),
+        body: child,
+        bottomNavigationBar: const BottomNavBar());
   }
 }

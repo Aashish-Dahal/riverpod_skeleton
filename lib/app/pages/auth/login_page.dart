@@ -6,24 +6,21 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_skeleton/app/config/routes/route_name.dart';
 import 'package:riverpod_skeleton/app/core/utils/app_colors.dart';
+import 'package:riverpod_skeleton/app/core/utils/snack_bar.dart';
 import 'package:riverpod_skeleton/app/widgets/atoms/button.dart';
 import 'package:riverpod_skeleton/app/widgets/atoms/input_field.dart';
 
 import '../../providers/auth/auth_provider.dart';
 
-class LoginPage extends ConsumerWidget {
+class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(
+    BuildContext context,
+  ) {
     final formKey = GlobalKey<FormBuilderState>();
-    ref.listen(authNotifierProvider, (prev, next) {
-      next.maybeWhen(
-        orElse: () => null,
-        authenticated: (user) {},
-        unauthenticated: (message) {},
-      );
-    });
+
     return Scaffold(
         appBar: AppBar(
           title: const Text('Login Page'),
@@ -60,21 +57,38 @@ class LoginPage extends ConsumerWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                Button(
-                  label: 'Login',
-                  disabled: ref
-                      .watch(authNotifierProvider)
-                      .maybeWhen(orElse: () => false, loading: () => true),
-                  loading: ref
-                      .watch(authNotifierProvider)
-                      .maybeWhen(orElse: () => false, loading: () => true),
-                  onPressed: () {
-                    if (formKey.currentState!.validate()) {
-                      formKey.currentState!.save();
-                      ref
-                          .read(authNotifierProvider.notifier)
-                          .firebaseLogin(formKey.currentState!.value);
-                    }
+                Consumer(
+                  builder: (context, ref, child) {
+                    ref.listen(authNotifierProvider, (prev, next) {
+                      next.maybeWhen(
+                        orElse: () => null,
+                        authenticated: (user) {
+                          showSuccess(message: "Authenticated");
+                        },
+                        unauthenticated: (message) {
+                          showError(
+                            message: message,
+                          );
+                        },
+                      );
+                    });
+                    return Button(
+                      label: 'Login',
+                      disabled: ref
+                          .watch(authNotifierProvider)
+                          .maybeWhen(orElse: () => false, loading: () => true),
+                      loading: ref
+                          .watch(authNotifierProvider)
+                          .maybeWhen(orElse: () => false, loading: () => true),
+                      onPressed: () {
+                        if (formKey.currentState!.validate()) {
+                          formKey.currentState!.save();
+                          ref
+                              .read(authNotifierProvider.notifier)
+                              .firebaseLogin(formKey.currentState!.value);
+                        }
+                      },
+                    );
                   },
                 ),
                 const SizedBox(
@@ -92,7 +106,7 @@ class LoginPage extends ConsumerWidget {
                           .bodyText1!
                           .copyWith(color: AppColors.purple),
                       recognizer: TapGestureRecognizer()
-                        ..onTap = () => context.goNamed(RouteName.register)),
+                        ..onTap = () => context.pushNamed(RouteName.register)),
                 ])),
               ],
             ),
