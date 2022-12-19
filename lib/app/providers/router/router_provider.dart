@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:riverpod_skeleton/app.dart';
 import 'package:riverpod_skeleton/app/pages/home/home_navigator.dart';
 import 'package:riverpod_skeleton/app/pages/home/home_page.dart';
-
+import 'package:riverpod_skeleton/app/services/auth/index.dart';
 import '../../config/routes/route_name.dart';
 import '../../config/routes/route_path.dart';
 import '../../pages/auth/login_page.dart';
@@ -18,16 +18,22 @@ final routerProvider = Provider<GoRouter>((ref) {
       navigatorKey: rootNavigatorKey,
       routes: [
         GoRoute(
-            name: RouteName.login,
-            path: RoutePath.login,
-            builder: (context, state) => const LoginPage(),
-            routes: [
-              GoRoute(
-                name: RouteName.register,
-                path: RoutePath.register,
-                builder: (context, state) => const RegisterPage(),
-              ),
-            ]),
+          name: RouteName.login,
+          path: RoutePath.login,
+          builder: (context, state) => const LoginPage(),
+          redirect: (context, state) {
+            final user = ref.watch(authStateServiceProvider).asData;
+            if (user?.value == null) {
+              return RoutePath.login;
+            }
+            return RoutePath.home;
+          },
+        ),
+        GoRoute(
+          name: RouteName.register,
+          path: RoutePath.register,
+          builder: (context, state) => const RegisterPage(),
+        ),
         ShellRoute(
             navigatorKey: shellNavigatorKey,
             pageBuilder: (context, state, child) => NoTransitionPage(
