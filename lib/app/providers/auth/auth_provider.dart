@@ -2,13 +2,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_skeleton/app/providers/auth/state/index.dart';
 import 'package:riverpod_skeleton/app/services/auth/index.dart';
 
-final authNotifierProvider =
-    StateNotifierProvider<AuthNotifierProvider, AuthenticationState>(
-        (ref) => AuthNotifierProvider(ref));
+final loginNotifierProvider = StateNotifierProvider.autoDispose<
+    LoginNotifierProvider,
+    AuthenticationState>((ref) => LoginNotifierProvider(ref));
+final registerNotifierProvider = StateNotifierProvider.autoDispose<
+    RegisterNotifierProvider,
+    AuthenticationState>((ref) => RegisterNotifierProvider(ref));
 
-class AuthNotifierProvider extends StateNotifier<AuthenticationState> {
+class LoginNotifierProvider extends StateNotifier<AuthenticationState> {
   final Ref _ref;
-  AuthNotifierProvider(this._ref) : super(const AuthenticationState.initial());
+  LoginNotifierProvider(this._ref) : super(const AuthenticationState.initial());
 
   Future<void> firebaseLogin(Map<String, dynamic>? data) async {
     state = const AuthenticationState.loading();
@@ -17,6 +20,12 @@ class AuthNotifierProvider extends StateNotifier<AuthenticationState> {
         (error) => AuthenticationState.unauthenticated(message: error),
         (res) => AuthenticationState.authenticated(user: res!));
   }
+}
+
+class RegisterNotifierProvider extends StateNotifier<AuthenticationState> {
+  final Ref _ref;
+  RegisterNotifierProvider(this._ref)
+      : super(const AuthenticationState.initial());
 
   Future<void> firebaseRegister(Map<String, dynamic>? data) async {
     state = const AuthenticationState.loading();

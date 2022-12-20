@@ -41,7 +41,6 @@ class AuthService {
               email: data!['email'], password: data['password']);
       return right(response.user!);
     } on FirebaseException catch (e) {
-      print(e.code);
       return left(e.message ?? 'Register failed');
     }
   }
