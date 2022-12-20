@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_skeleton/app.dart';
+import 'package:riverpod_skeleton/app/pages/goRouterTopics/route_parameter.dart';
 import 'package:riverpod_skeleton/app/pages/home/home_navigator.dart';
 import 'package:riverpod_skeleton/app/pages/home/home_page.dart';
 import 'package:riverpod_skeleton/app/services/auth/index.dart';
@@ -34,6 +35,11 @@ final routerProvider = Provider<GoRouter>((ref) {
           path: RoutePath.register,
           builder: (context, state) => const RegisterPage(),
         ),
+        GoRoute(
+            name: RouteName.params,
+            path: RoutePath.params,
+            builder: (context, state) =>
+                RouteParameters(params: state.extra as Params)),
         ShellRoute(
             navigatorKey: shellNavigatorKey,
             pageBuilder: (context, state, child) => NoTransitionPage(

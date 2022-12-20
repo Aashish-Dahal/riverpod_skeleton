@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_skeleton/app.dart';
 import 'package:riverpod_skeleton/app/core/utils/assest_path.dart';
+import 'package:riverpod_skeleton/config.dart';
 import 'package:riverpod_skeleton/injector.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeDependencies();
   runApp(EasyLocalization(
-      startLocale: const Locale('en'),
+      startLocale: const Locale(Config.locale),
       useOnlyLangCode: true,
       supportedLocales: const [
         Locale('en'),

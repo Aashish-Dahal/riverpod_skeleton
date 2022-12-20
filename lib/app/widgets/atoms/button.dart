@@ -59,7 +59,7 @@ class Button extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
             side: type == ButtonType.filled
                 ? BorderSide.none
-                : const BorderSide(color: AppColors.purple, width: 1)),
+                : BorderSide(color: AppColors.purple, width: 1)),
         fillColor: disabled!
             ? type == ButtonType.filled
                 ? AppColors.purple.withOpacity(.5)
@@ -68,7 +68,7 @@ class Button extends StatelessWidget {
                 ? AppColors.purple
                 : null,
         child: loading
-            ? const SizedBox(
+            ? SizedBox(
                 height: 25,
                 width: 25,
                 child: CircularProgressIndicator.adaptive(

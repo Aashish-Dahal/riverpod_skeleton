@@ -62,7 +62,7 @@ _snackBar({
               message,
               maxLines: maxLines,
               softWrap: true,
-              style: style ?? const TextStyle(color: AppColors.white),
+              style: style ?? TextStyle(color: AppColors.white),
             )
           ],
         ),

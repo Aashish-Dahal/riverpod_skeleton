@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart'
     show
+        AppBarTheme,
         BorderRadius,
         BorderSide,
         Brightness,
@@ -17,7 +18,7 @@ import '../../core/utils/app_colors.dart' show AppColors;
 
 class AppTheme {
   AppTheme._();
-  static TextStyle headline1 = const TextStyle(
+  static TextStyle headline1 = TextStyle(
     color: AppColors.black,
     height: 48.0 / 36.0,
     // line height calculated as is fontSize * height so, <expected-height>/<font-size>
@@ -27,7 +28,7 @@ class AppTheme {
     leadingDistribution: TextLeadingDistribution.even,
   );
 
-  static TextStyle headline2Bold = const TextStyle(
+  static TextStyle headline2Bold = TextStyle(
     color: AppColors.black,
     height: 36.0 / 18.0,
     fontSize: 18.0,
@@ -36,7 +37,7 @@ class AppTheme {
     leadingDistribution: TextLeadingDistribution.even,
   );
 
-  static TextStyle heading2Regular = const TextStyle(
+  static TextStyle heading2Regular = TextStyle(
     color: AppColors.black,
     height: 36.0 / 18.0,
     fontSize: 18.0,
@@ -45,7 +46,7 @@ class AppTheme {
     leadingDistribution: TextLeadingDistribution.even,
   );
 
-  static TextStyle button = const TextStyle(
+  static TextStyle button = TextStyle(
     color: AppColors.white,
     height: 26.0 / 18.0,
     fontSize: 18.0,
@@ -54,7 +55,7 @@ class AppTheme {
     leadingDistribution: TextLeadingDistribution.even,
   );
 
-  static TextStyle captionBold = const TextStyle(
+  static TextStyle captionBold = TextStyle(
     color: AppColors.black,
     height: 22.0 / 16.0,
     fontSize: 16.0,
@@ -63,7 +64,7 @@ class AppTheme {
     leadingDistribution: TextLeadingDistribution.even,
   );
 
-  static TextStyle captionRegular = const TextStyle(
+  static TextStyle captionRegular = TextStyle(
     color: AppColors.black,
     height: 20.0 / 16.0,
     fontSize: 16.0,
@@ -72,7 +73,7 @@ class AppTheme {
     leadingDistribution: TextLeadingDistribution.even,
   );
 
-  static TextStyle textBold = const TextStyle(
+  static TextStyle textBold = TextStyle(
     color: AppColors.black,
     height: 20.0 / 14.0,
     fontSize: 14.0,
@@ -81,7 +82,7 @@ class AppTheme {
     leadingDistribution: TextLeadingDistribution.even,
   );
 
-  static TextStyle textRegular = const TextStyle(
+  static TextStyle textRegular = TextStyle(
     color: AppColors.black,
     height: 20.0 / 14.0,
     fontSize: 14.0,
@@ -90,7 +91,7 @@ class AppTheme {
     leadingDistribution: TextLeadingDistribution.even,
   );
 
-  static TextStyle subHeading = const TextStyle(
+  static TextStyle subHeading = TextStyle(
     color: AppColors.black,
     height: 20.0 / 12.0,
     fontSize: 12.0,
@@ -102,6 +103,7 @@ class AppTheme {
   static ThemeData get dark => ThemeData(brightness: Brightness.dark);
   static ThemeData get light => ThemeData(
       brightness: Brightness.light,
+      scaffoldBackgroundColor: AppColors.scaffoldBackgroundColor,
       textTheme: TextTheme(
         headline1: headline1,
         headline2: headline2Bold,
@@ -113,26 +115,27 @@ class AppTheme {
         caption: subHeading,
         button: button,
       ),
-      inputDecorationTheme: const InputDecorationTheme(
+      inputDecorationTheme: InputDecorationTheme(
         focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(6)),
+          borderRadius: const BorderRadius.all(Radius.circular(6)),
           borderSide: BorderSide(color: AppColors.red, width: 1),
         ),
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(6)),
+          borderRadius: const BorderRadius.all(Radius.circular(6)),
           borderSide: BorderSide(color: AppColors.red, width: 1),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(6)),
+          borderRadius: const BorderRadius.all(Radius.circular(6)),
           borderSide: BorderSide(color: AppColors.greyLight, width: 1),
         ),
         disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(6)),
+          borderRadius: const BorderRadius.all(Radius.circular(6)),
           borderSide: BorderSide(color: AppColors.greyLight, width: 1),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(6)),
+          borderRadius: const BorderRadius.all(Radius.circular(6)),
           borderSide: BorderSide(color: AppColors.greyLight, width: 1),
         ),
-      ));
+      ),
+      appBarTheme: AppBarTheme(backgroundColor: AppColors.purple));
 }
